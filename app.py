@@ -756,4 +756,4 @@ def update_dashboard(start_date, end_date, member_level, region_segment, ip_name
 if __name__ == "__main__":
     import os
     server = app.server
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), debug=False)
