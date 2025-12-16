@@ -506,7 +506,7 @@ app.layout = html.Div(
 
                         html.Hr(className="sep"),
 
-                        html.H3("Visualizations (10)"),
+                        html.H3("Performance Graphs"),
                         html.Div(
                             className="row",
                             children=[
@@ -748,7 +748,12 @@ def update_dashboard(start_date, end_date, member_level, region_segment, ip_name
 # ============================================================
 # 8) Local run
 # ============================================================
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", "8080"))
+#if __name__ == "__main__":
+ #   port = int(os.environ.get("PORT", "8080"))
     #app.run(host="0.0.0.0", port=port, debug=DASH_DEBUG)
-    app.run(debug=True)
+  #  app.run(debug=True)
+
+if __name__ == "__main__":
+    import os
+    server = app.server
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), debug=True)
