@@ -410,7 +410,7 @@ def graph_card(title: str, graph_id: str, height_px: int = 340) -> html.Div:
         style={"flex": "1 1 520px"},
         children=[
             html.Div(title, className="graph-title"),
-            dcc.Graph(id=graph_id, config=_GRAPH_CONFIG, style={"height": f"{height_px}px"}),
+            dcc.Graph(id=graph_id, config=_GRAPH_CONFIG, style={"height": "100%"}),
         ],
     )
 
@@ -681,8 +681,10 @@ def update_dashboard(start_date, end_date, member_level, region_segment, ip_name
 
         # 5) Top IPs
         df_rev_ip = fetch_top_ips(where_sales, params_sales, top_n=int(top_n))
+        row_px = 28
+        fig_h = max(340, 140 + row_px * len(df_rev_ip))
         fig_rev_ip = px.bar(df_rev_ip, x="revenue", y="ip_name", orientation="h", template="jp_clean")
-        fig_rev_ip.update_layout(xaxis_title="Revenue", yaxis_title="")
+        fig_rev_ip.update_layout(height=fig_h, xaxis_title="Revenue", yaxis_title="")
         fig_rev_ip.update_yaxes(autorange="reversed", automargin=True)
 
         # 6) Revenue by rarity
@@ -697,8 +699,10 @@ def update_dashboard(start_date, end_date, member_level, region_segment, ip_name
 
         # 8) Top products
         df_top_products = fetch_top_products(where_sales, params_sales, top_n=int(top_n))
+        row_px = 28
+        fig_h = max(340, 140 + row_px * len(df_top_products))
         fig_top_products = px.bar(df_top_products, x="revenue", y="box_name", orientation="h", template="jp_clean")
-        fig_top_products.update_layout(xaxis_title="Revenue", yaxis_title="",)
+        fig_top_products.update_layout(height=fig_h, xaxis_title="Revenue", yaxis_title="",)
         fig_top_products.update_yaxes(autorange="reversed", automargin=True)
 
         # 9) Inventory trend
